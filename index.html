@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Little Systems – Industrial Automation & CBM Specialists</title>
-  <meta name="description" content="Little Systems delivers expert PLC programming, SCADA systems, condition-based maintenance (CBM), and industrial automation consulting." />
+  <title>Little Systems – PLC, SCADA & Industrial Automation | Faridabad, India</title>
+  <meta name="description" content="Little Systems, Faridabad — Reliable since 1993. Expert PLC programming, SCADA systems, CBM, IoT/Industry 4.0, and industrial automation consulting. 3680+ PLC panels delivered." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -250,10 +250,11 @@
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
     .hero-stats {
       display: flex;
-      gap: 32px;
-      margin-top: 56px;
-      padding-top: 32px;
+      gap: 24px;
+      margin-top: 48px;
+      padding-top: 28px;
       border-top: 1px solid var(--border);
+      flex-wrap: wrap;
     }
     .stat-item {}
     .stat-value {
@@ -382,6 +383,7 @@
     .sc-plc::before   { background: linear-gradient(90deg, #10b981, #34d399); }
     .sc-scada::before { background: linear-gradient(90deg, #6366f1, #818cf8); }
     .sc-consult::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .sc-iot::before    { background: linear-gradient(90deg, #ec4899, #a855f7); }
     .service-icon {
       width: 52px;
       height: 52px;
@@ -395,6 +397,7 @@
     .si-plc   { background: rgba(16,185,129,0.12); }
     .si-scada { background: rgba(99,102,241,0.12); }
     .si-consult { background: rgba(245,158,11,0.12); }
+    .si-iot   { background: rgba(236,72,153,0.12); }
     .service-icon svg { width: 26px; height: 26px; }
     .service-name {
       font-family: 'Space Grotesk', sans-serif;
@@ -423,6 +426,7 @@
     .sc-plc   .service-features li::before { background: var(--green); }
     .sc-scada .service-features li::before { background: #818cf8; }
     .sc-consult .service-features li::before { background: var(--orange); }
+    .sc-iot   .service-features li::before { background: #ec4899; }
 
     /* ─── CBM Deep Dive ────────────────────────────────────────────────────── */
     #cbm { background: var(--navy); }
@@ -758,7 +762,10 @@
           <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 0 4.93 19.07"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
         </svg>
       </div>
-      Little Systems
+      <div>
+        Little Systems
+        <div style="font-size:10px;font-weight:400;color:var(--muted);margin-top:-2px;letter-spacing:0.04em;">Reliable Since 1993</div>
+      </div>
     </a>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
@@ -782,8 +789,8 @@
     <a href="#services" onclick="closeMobileNav()">Services</a>
     <a href="#cbm" onclick="closeMobileNav()">Condition-Based Maintenance</a>
     <a href="#why" onclick="closeMobileNav()">Why Choose Us</a>
-    <a href="#industries" onclick="closeMobileNav()">Industries</a>
-    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+    <a href="#industries" onclick="closeMobileNav()">Industries Served</a>
+    <a href="#contact" onclick="closeMobileNav()">Contact Us</a>
   </div>
 </nav>
 
@@ -796,15 +803,14 @@
       <div class="hero-text">
         <div class="hero-eyebrow">
           <span class="dot"></span>
-          Industrial Automation Specialists
+          Faridabad, India · Reliable Since 1993
         </div>
         <h1 class="hero-title">
-          Smarter Maintenance.<br>
-          <span class="highlight">Intelligent Systems.</span><br>
-          Zero Surprises.
+          Drive Plant <span class="highlight">Efficiency,</span><br>
+          Productivity<br>and Profits.
         </h1>
         <p class="hero-desc">
-          Little Systems delivers world-class PLC programming, SCADA integration, and condition-based maintenance solutions that keep your operations running — before problems arise.
+          Maximise your operational performance with Little Systems' innovative PLC-SCADA solutions. With over 32 years of experience, we deliver reliable, easy-to-use automation that keeps factories running smoothly — without the technical headaches.
         </p>
         <div class="hero-actions">
           <a href="#services" class="btn btn-primary">
@@ -815,16 +821,20 @@
         </div>
         <div class="hero-stats">
           <div class="stat-item">
-            <div class="stat-value">20+</div>
+            <div class="stat-value">32+</div>
             <div class="stat-label">Years Experience</div>
           </div>
           <div class="stat-item">
-            <div class="stat-value">500+</div>
-            <div class="stat-label">Projects Delivered</div>
+            <div class="stat-value">3680</div>
+            <div class="stat-label">PLC Panels Built</div>
           </div>
           <div class="stat-item">
-            <div class="stat-value">98%</div>
-            <div class="stat-label">Client Satisfaction</div>
+            <div class="stat-value">163</div>
+            <div class="stat-label">SCADA Projects</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">167</div>
+            <div class="stat-label">Turnkey Projects</div>
           </div>
         </div>
       </div>
@@ -880,14 +890,17 @@
 <div id="trusted">
   <div class="container">
     <div class="trusted-inner">
-      <span class="trusted-label">Trusted across industries</span>
+      <span class="trusted-label">Prestigious Clients</span>
       <div class="trusted-logos">
-        <span class="trusted-logo">Oil &amp; Gas</span>
-        <span class="trusted-logo">Power Generation</span>
-        <span class="trusted-logo">Water Treatment</span>
-        <span class="trusted-logo">Manufacturing</span>
-        <span class="trusted-logo">Mining</span>
-        <span class="trusted-logo">Petrochemicals</span>
+        <span class="trusted-logo">Samsung</span>
+        <span class="trusted-logo">Disposafe</span>
+        <span class="trusted-logo">GASCO</span>
+        <span class="trusted-logo">Endress+Hauser</span>
+        <span class="trusted-logo">IIT Delhi</span>
+        <span class="trusted-logo">HMD</span>
+        <span class="trusted-logo">JCB</span>
+        <span class="trusted-logo">Pooja Forge</span>
+        <span class="trusted-logo">Elofic</span>
       </div>
     </div>
   </div>
@@ -975,6 +988,25 @@
           <li>System migration &amp; upgrades</li>
           <li>Training &amp; knowledge transfer</li>
           <li>Project management &amp; commissioning</li>
+        </ul>
+      </div>
+
+      <!-- IoT / Industry 4.0 -->
+      <div class="service-card sc-iot">
+        <div class="service-icon si-iot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49"/>
+            <path d="M20.07 4.93a10 10 0 0 1 0 14.14M3.93 19.07a10 10 0 0 1 0-14.14"/>
+          </svg>
+        </div>
+        <div class="service-name">IoT &amp; Industry 4.0</div>
+        <p class="service-desc">Connect your factory to the cloud with Industrial IoT solutions that provide real-time visibility, remote control, and data-driven optimisation.</p>
+        <ul class="service-features" style="--dot-color:#ec4899">
+          <li>Remote monitoring dashboards</li>
+          <li>Cloud data integration (AWS, Azure)</li>
+          <li>Edge computing &amp; gateway solutions</li>
+          <li>Predictive analytics &amp; AI insights</li>
+          <li>MQTT / OPC-UA / REST API bridging</li>
         </ul>
       </div>
 
@@ -1087,8 +1119,8 @@
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
         </div>
-        <div class="why-title">Proven Track Record</div>
-        <div class="why-desc">Over two decades delivering automation and maintenance projects across oil &amp; gas, power, water, and manufacturing sectors.</div>
+        <div class="why-title">32 Years of Proven Expertise</div>
+        <div class="why-desc">Founded in 1993, Little Systems has built 3,680+ PLC panels and delivered 167 turnkey projects across manufacturing, power, water, and more.</div>
       </div>
       <div class="why-card">
         <div class="why-icon">
@@ -1143,6 +1175,27 @@
         <div class="why-title">Fixed-Scope Delivery</div>
         <div class="why-desc">Clear deliverables, transparent pricing, and structured milestones. Projects are delivered on time and within budget.</div>
       </div>
+
+      <!-- Mitsubishi partner card spanning full width -->
+      <div class="why-card" style="grid-column:1/-1;display:flex;align-items:center;gap:32px;flex-wrap:wrap;background:linear-gradient(135deg,rgba(220,38,38,0.06),rgba(14,165,233,0.04));border-color:rgba(220,38,38,0.2);">
+        <div style="flex-shrink:0;width:64px;height:64px;background:#cc0000;border-radius:12px;display:flex;align-items:center;justify-content:center;">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="white">
+            <polygon points="18,2 24,11 18,11"/><polygon points="12,11 18,11 18,20"/><polygon points="18,11 24,11 18,20"/>
+            <polygon points="6,20 12,11 18,20"/><polygon points="18,20 24,11 30,20"/>
+            <polygon points="6,20 12,29 18,20"/><polygon points="18,20 24,29 30,20"/>
+            <polygon points="12,29 18,20 18,29"/><polygon points="18,20 18,29 24,29"/>
+          </svg>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Authorized Channel Partner</div>
+          <div style="font-size:17px;font-weight:700;color:#f8fafc;margin-bottom:4px;">Mitsubishi Electric — Factory Automation &amp; Industrial Division</div>
+          <div style="font-size:14px;color:var(--muted);">Little Systems, Faridabad is an authorized <strong style="color:#e2e8f0;">Bronze Channel Partner</strong> for Mitsubishi Electric's Factory Automation &amp; Industrial Division products — ensuring genuine parts, certified support, and manufacturer-backed engineering.</div>
+        </div>
+        <div style="flex-shrink:0;">
+          <span class="badge" style="background:rgba(220,38,38,0.1);color:#fca5a5;border-color:rgba(220,38,38,0.25);">Certified Partner</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1202,7 +1255,7 @@
           Start a Conversation
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="tel:+000000000" class="btn btn-ghost">
+        <a href="tel:+919811043930" class="btn btn-ghost">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.73 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Call Us Now
         </a>
@@ -1230,7 +1283,7 @@
             </div>
             <div>
               <div class="contact-label">Phone</div>
-              <div class="contact-val">+1 (000) 000-0000</div>
+              <div class="contact-val">+91 98110 43930</div>
             </div>
           </div>
           <div class="contact-card">
@@ -1252,7 +1305,7 @@
             </div>
             <div>
               <div class="contact-label">Location</div>
-              <div class="contact-val">Your City, Country</div>
+              <div class="contact-val">Faridabad, Haryana, India</div>
             </div>
           </div>
           <div class="contact-card">
@@ -1331,16 +1384,20 @@
               <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 0 4.93 19.07"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
             </svg>
           </div>
-          Little Systems
+          <div>
+            Little Systems
+            <div style="font-size:10px;font-weight:400;color:var(--muted);margin-top:-2px;letter-spacing:0.04em;">Reliable Since 1993</div>
+          </div>
         </a>
-        <p class="footer-tagline">Specialists in industrial automation, PLC programming, SCADA systems, and condition-based maintenance for heavy industry worldwide.</p>
+        <p class="footer-tagline">Faridabad, India — Specialists in PLC programming, SCADA systems, IoT/Industry 4.0, CBM, and industrial automation. Trusted by Samsung, JCB, IIT Delhi, and 160+ clients since 1993.</p>
       </div>
       <div>
         <div class="footer-col-title">Services</div>
         <ul class="footer-links">
-          <li><a href="#services">Condition-Based Maintenance</a></li>
           <li><a href="#services">PLC Programming</a></li>
           <li><a href="#services">SCADA Systems</a></li>
+          <li><a href="#services">IoT &amp; Industry 4.0</a></li>
+          <li><a href="#cbm">Condition-Based Maintenance</a></li>
           <li><a href="#services">Automation Consulting</a></li>
         </ul>
       </div>
@@ -1356,15 +1413,15 @@
       <div>
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
-          <li><a href="tel:+000000000">+1 (000) 000-0000</a></li>
+          <li><a href="tel:+919811043930">+91 98110 43930</a></li>
           <li><a href="mailto:info@littlesystems.com">info@littlesystems.com</a></li>
-          <li><a href="#contact">Your City, Country</a></li>
+          <li><a href="#contact">Faridabad, Haryana, India</a></li>
           <li><a href="#contact">Mon–Fri 8 AM–6 PM</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Little Systems. All rights reserved.</div>
+      <div class="footer-copy">© 1993–2026 Little Systems, Faridabad. All rights reserved.</div>
       <div class="footer-legal">
         <a href="#">Privacy Policy</a>
         <a href="#">Terms of Service</a>
