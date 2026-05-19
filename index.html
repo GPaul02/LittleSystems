@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Little Systems – Industrial Automation & CBM Specialists</title>
+  <meta name="description" content="Little Systems delivers expert PLC programming, SCADA systems, condition-based maintenance (CBM), and industrial automation consulting." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0a0f1e;
+      color: #e2e8f0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── CSS Variables ────────────────────────────────────────────────────── */
+    :root {
+      --navy:      #0a0f1e;
+      --navy-mid:  #111827;
+      --navy-card: #161d2f;
+      --border:    #1e2d45;
+      --accent:    #0ea5e9;
+      --accent2:   #38bdf8;
+      --green:     #10b981;
+      --orange:    #f59e0b;
+      --text:      #e2e8f0;
+      --muted:     #94a3b8;
+      --radius:    12px;
+      --radius-lg: 20px;
+    }
+
+    /* ─── Scrollbar ────────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ─── Utility ──────────────────────────────────────────────────────────── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 0; }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 1px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #f8fafc;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(14,165,233,0.12);
+      color: var(--accent2);
+      border: 1px solid rgba(14,165,233,0.2);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,165,233,0.35); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ─── Nav ──────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .nav-logo .logo-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo .logo-icon svg { width: 20px; height: 20px; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #f8fafc; }
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+
+    /* ─── Hero ─────────────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 68px;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 60% 40%, rgba(14,165,233,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(99,102,241,0.06) 0%, transparent 50%);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(30,45,69,0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30,45,69,0.4) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 99px;
+      background: rgba(14,165,233,0.08);
+      border: 1px solid rgba(14,165,233,0.2);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent2);
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 800;
+      line-height: 1.08;
+      color: #f8fafc;
+      margin-bottom: 24px;
+    }
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--accent), #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-item {}
+    .stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .stat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-diagram {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 1;
+      position: relative;
+    }
+    /* Animated circuit / industrial diagram */
+    .diagram-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(14,165,233,0.15);
+      animation: spin-slow linear infinite;
+    }
+    .diagram-ring:nth-child(1) { inset: 0; animation-duration: 30s; }
+    .diagram-ring:nth-child(2) { inset: 12%; animation-duration: 22s; animation-direction: reverse; border-color: rgba(99,102,241,0.15); }
+    .diagram-ring:nth-child(3) { inset: 24%; animation-duration: 16s; }
+    .diagram-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    .diagram-center {
+      position: absolute;
+      inset: 35%;
+      background: var(--navy-card);
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px rgba(14,165,233,0.12);
+    }
+    .diagram-center svg { width: 48px; height: 48px; }
+    .floating-card {
+      position: absolute;
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      white-space: nowrap;
+    }
+    .floating-card .fc-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .fc-1 { top: 8%; left: -8%; animation: float1 4s ease-in-out infinite; }
+    .fc-2 { bottom: 14%; right: -10%; animation: float2 5s ease-in-out infinite; }
+    .fc-3 { top: 42%; right: -14%; animation: float1 3.5s ease-in-out infinite 1s; }
+    @keyframes float1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes float2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+    /* ─── Trusted By ───────────────────────────────────────────────────────── */
+    #trusted {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--navy-mid);
+    }
+    .trusted-inner {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trusted-label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+    .trusted-logos { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .trusted-logo { font-size: 14px; font-weight: 600; color: rgba(148,163,184,0.45); transition: color 0.2s; }
+    .trusted-logo:hover { color: var(--muted); }
+
+    /* ─── Services ─────────────────────────────────────────────────────────── */
+    #services { background: var(--navy-mid); }
+    .services-header { margin-bottom: 60px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .service-card:hover { border-color: rgba(14,165,233,0.3); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .service-card:hover::before { opacity: 1; }
+    .sc-cbm::before   { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+    .sc-plc::before   { background: linear-gradient(90deg, #10b981, #34d399); }
+    .sc-scada::before { background: linear-gradient(90deg, #6366f1, #818cf8); }
+    .sc-consult::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .si-cbm   { background: rgba(14,165,233,0.12); }
+    .si-plc   { background: rgba(16,185,129,0.12); }
+    .si-scada { background: rgba(99,102,241,0.12); }
+    .si-consult { background: rgba(245,158,11,0.12); }
+    .service-icon svg { width: 26px; height: 26px; }
+    .service-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 12px;
+    }
+    .service-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .service-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .service-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .service-features li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .sc-plc   .service-features li::before { background: var(--green); }
+    .sc-scada .service-features li::before { background: #818cf8; }
+    .sc-consult .service-features li::before { background: var(--orange); }
+
+    /* ─── CBM Deep Dive ────────────────────────────────────────────────────── */
+    #cbm { background: var(--navy); }
+    .cbm-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .cbm-steps { display: flex; flex-direction: column; gap: 4px; margin-top: 40px; }
+    .cbm-step {
+      display: flex;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .cbm-step:last-child { border-bottom: none; }
+    .cbm-step:hover { padding-left: 8px; }
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      opacity: 0.35;
+      flex-shrink: 0;
+      width: 36px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .step-content {}
+    .step-title { font-size: 16px; font-weight: 600; color: #f8fafc; margin-bottom: 4px; }
+    .step-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .cbm-visual { position: relative; }
+    .cbm-chart-wrap {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      overflow: hidden;
+    }
+    .chart-title { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .chart-bars { display: flex; align-items: flex-end; gap: 10px; height: 140px; }
+    .chart-bar {
+      flex: 1;
+      border-radius: 6px 6px 0 0;
+      position: relative;
+      transition: all 0.6s cubic-bezier(0.34,1.56,0.64,1);
+      animation: bar-grow 1s ease both;
+    }
+    @keyframes bar-grow { from { transform: scaleY(0); transform-origin: bottom; } }
+    .bar-cbm { background: linear-gradient(180deg, #0ea5e9, rgba(14,165,233,0.3)); }
+    .bar-ppm { background: linear-gradient(180deg, #475569, rgba(71,85,105,0.3)); }
+    .bar-bm  { background: linear-gradient(180deg, #ef4444, rgba(239,68,68,0.3)); }
+    .chart-labels { display: flex; gap: 10px; margin-top: 12px; }
+    .chart-lbl { flex: 1; font-size: 11px; color: var(--muted); text-align: center; }
+    .cbm-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .metric-box {
+      background: rgba(14,165,233,0.06);
+      border: 1px solid rgba(14,165,233,0.12);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .metric-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+    .metric-lbl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .cbm-techniques {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .technique-tag {
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500;
+      background: rgba(14,165,233,0.08);
+      border: 1px solid rgba(14,165,233,0.15);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .technique-tag:hover { color: var(--accent2); border-color: rgba(14,165,233,0.35); }
+
+    /* ─── Why Us ───────────────────────────────────────────────────────────── */
+    #why { background: var(--navy-mid); }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+    .why-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: all 0.3s;
+    }
+    .why-card:hover { border-color: rgba(14,165,233,0.25); transform: translateY(-3px); }
+    .why-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(14,165,233,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .why-icon svg { width: 24px; height: 24px; }
+    .why-title { font-size: 17px; font-weight: 600; color: #f8fafc; margin-bottom: 8px; }
+    .why-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* ─── Industries ───────────────────────────────────────────────────────── */
+    #industries { background: var(--navy); }
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 56px;
+    }
+    .industry-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      text-align: center;
+      transition: all 0.25s;
+    }
+    .industry-card:hover { border-color: rgba(14,165,233,0.3); background: rgba(14,165,233,0.04); transform: translateY(-3px); }
+    .industry-icon { font-size: 32px; margin-bottom: 12px; }
+    .industry-name { font-size: 14px; font-weight: 600; color: #f8fafc; margin-bottom: 4px; }
+    .industry-desc { font-size: 12px; color: var(--muted); }
+
+    /* ─── CTA Banner ───────────────────────────────────────────────────────── */
+    #cta-banner {
+      background: linear-gradient(135deg, #0c1a2e, #0f2244);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(14,165,233,0.08), transparent 60%);
+    }
+    .cta-inner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .cta-text {}
+    .cta-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(24px, 3.5vw, 38px);
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 10px;
+    }
+    .cta-sub { font-size: 16px; color: var(--muted); }
+    .cta-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ─── Contact ──────────────────────────────────────────────────────────── */
+    #contact { background: var(--navy-mid); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-info {}
+    .contact-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(14,165,233,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 20px; height: 20px; }
+    .contact-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .contact-val { font-size: 15px; font-weight: 500; color: #f8fafc; margin-top: 2px; }
+
+    /* Contact Form */
+    .contact-form-wrap {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+    .form-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label { display: block; font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
+    input, textarea, select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text);
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
+    }
+    input::placeholder, textarea::placeholder { color: rgba(148,163,184,0.5); }
+    select option { background: #161d2f; }
+    textarea { resize: vertical; min-height: 120px; }
+    .form-submit { width: 100%; justify-content: center; margin-top: 4px; }
+
+    /* ─── Footer ───────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      padding: 60px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-tagline { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 280px; }
+    .footer-col-title { font-size: 13px; font-weight: 600; color: #f8fafc; margin-bottom: 16px; letter-spacing: 0.04em; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: var(--muted); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent2); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 13px; color: rgba(148,163,184,0.5); }
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 13px; color: rgba(148,163,184,0.5); transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--muted); }
+
+    /* ─── Responsive ───────────────────────────────────────────────────────── */
+    @media (max-width: 968px) {
+      .hero-content { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { order: -1; }
+      .hero-diagram { max-width: 340px; margin: 0 auto; }
+      .cbm-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .section { padding: 72px 0; }
+      .nav-links, .nav-cta .btn-ghost { display: none; }
+      .hamburger { display: flex; }
+      .hero-stats { flex-wrap: wrap; gap: 20px; }
+      .form-row { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .fc-1, .fc-2, .fc-3 { display: none; }
+      .cta-inner { flex-direction: column; }
+    }
+
+    /* Mobile nav drawer */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 0;
+      background: var(--navy-card);
+      border-top: 1px solid var(--border);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      padding: 16px 24px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--text); background: rgba(14,165,233,0.05); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ NAV ══ -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="#hero">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 0 4.93 19.07"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+        </svg>
+      </div>
+      Little Systems
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#cbm">CBM</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost" style="padding:10px 20px;font-size:14px;">Get a Quote</a>
+      <a href="#contact" class="btn btn-primary" style="padding:10px 20px;font-size:14px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.73 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Contact Us
+      </a>
+      <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#services" onclick="closeMobileNav()">Services</a>
+    <a href="#cbm" onclick="closeMobileNav()">Condition-Based Maintenance</a>
+    <a href="#why" onclick="closeMobileNav()">Why Choose Us</a>
+    <a href="#industries" onclick="closeMobileNav()">Industries</a>
+    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="dot"></span>
+          Industrial Automation Specialists
+        </div>
+        <h1 class="hero-title">
+          Smarter Maintenance.<br>
+          <span class="highlight">Intelligent Systems.</span><br>
+          Zero Surprises.
+        </h1>
+        <p class="hero-desc">
+          Little Systems delivers world-class PLC programming, SCADA integration, and condition-based maintenance solutions that keep your operations running — before problems arise.
+        </p>
+        <div class="hero-actions">
+          <a href="#services" class="btn btn-primary">
+            Explore Services
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-ghost">Get a Free Consultation</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-value">20+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">500+</div>
+            <div class="stat-label">Projects Delivered</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">98%</div>
+            <div class="stat-label">Client Satisfaction</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-diagram">
+          <div class="diagram-ring"></div>
+          <div class="diagram-ring"></div>
+          <div class="diagram-ring"></div>
+          <div class="diagram-center">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="floating-card fc-1">
+          <div class="fc-icon" style="background:rgba(16,185,129,0.12);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--muted);">Uptime Improved</div>
+            <div style="color:#f8fafc;">+34% this quarter</div>
+          </div>
+        </div>
+
+        <div class="floating-card fc-2">
+          <div class="fc-icon" style="background:rgba(14,165,233,0.12);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--muted);">CBM Alert</div>
+            <div style="color:#f8fafc;">Pump bearing: Normal</div>
+          </div>
+        </div>
+
+        <div class="floating-card fc-3">
+          <div class="fc-icon" style="background:rgba(245,158,11,0.12);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div style="font-size:11px;color:var(--muted);">PLC Response</div>
+            <div style="color:#f8fafc;">2 ms cycle time</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ TRUSTED ══ -->
+<div id="trusted">
+  <div class="container">
+    <div class="trusted-inner">
+      <span class="trusted-label">Trusted across industries</span>
+      <div class="trusted-logos">
+        <span class="trusted-logo">Oil &amp; Gas</span>
+        <span class="trusted-logo">Power Generation</span>
+        <span class="trusted-logo">Water Treatment</span>
+        <span class="trusted-logo">Manufacturing</span>
+        <span class="trusted-logo">Mining</span>
+        <span class="trusted-logo">Petrochemicals</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ SERVICES ══ -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">End-to-End Industrial<br>Automation Services</h2>
+      <p class="section-sub">From single-loop PLC programs to full plant-wide SCADA and predictive maintenance systems — we deliver solutions that last.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- CBM -->
+      <div class="service-card sc-cbm">
+        <div class="service-icon si-cbm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div class="service-name">Condition-Based Maintenance</div>
+        <p class="service-desc">Monitor equipment health in real time using vibration, temperature, and oil data — scheduling maintenance only when it's actually needed.</p>
+        <ul class="service-features">
+          <li>Vibration analysis &amp; spectrum diagnostics</li>
+          <li>Infrared thermography inspection</li>
+          <li>Oil analysis &amp; lubrication monitoring</li>
+          <li>Ultrasonic leak &amp; fault detection</li>
+          <li>Automated alert &amp; work-order triggers</li>
+        </ul>
+      </div>
+
+      <!-- PLC -->
+      <div class="service-card sc-plc">
+        <div class="service-icon si-plc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round">
+            <rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/>
+          </svg>
+        </div>
+        <div class="service-name">PLC Programming</div>
+        <p class="service-desc">Custom logic design, ladder diagram development, and commissioning for all major PLC platforms across every industry.</p>
+        <ul class="service-features">
+          <li>Siemens S7 / TIA Portal</li>
+          <li>Allen-Bradley / Rockwell Studio 5000</li>
+          <li>Schneider Electric / Unity Pro</li>
+          <li>Mitsubishi, Omron, ABB systems</li>
+          <li>Safety &amp; SIL-rated PLC design</li>
+        </ul>
+      </div>
+
+      <!-- SCADA -->
+      <div class="service-card sc-scada">
+        <div class="service-icon si-scada">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            <path d="M6 8h.01M9 8h6"/>
+          </svg>
+        </div>
+        <div class="service-name">SCADA Systems</div>
+        <p class="service-desc">Design and deploy supervisory control and data acquisition systems that give operators full visibility and control over their plant.</p>
+        <ul class="service-features">
+          <li>Ignition, iFIX, WinCC, Wonderware</li>
+          <li>Custom HMI screen design</li>
+          <li>Real-time data historian &amp; reporting</li>
+          <li>Remote monitoring &amp; alarming</li>
+          <li>OPC-UA / MQTT / Modbus integration</li>
+        </ul>
+      </div>
+
+      <!-- Consulting -->
+      <div class="service-card sc-consult">
+        <div class="service-icon si-consult">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="service-name">Industrial Automation Consulting</div>
+        <p class="service-desc">Strategic engineering advice and hands-on project management to modernize your plant, reduce costs, and eliminate unplanned downtime.</p>
+        <ul class="service-features">
+          <li>Plant-wide automation audits</li>
+          <li>Maintenance strategy development</li>
+          <li>System migration &amp; upgrades</li>
+          <li>Training &amp; knowledge transfer</li>
+          <li>Project management &amp; commissioning</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ CBM ══ -->
+<section id="cbm" class="section">
+  <div class="container">
+    <div class="cbm-inner">
+      <div class="cbm-left">
+        <div class="section-label">Deep Dive</div>
+        <h2 class="section-title">How Condition-Based Maintenance Works</h2>
+        <p class="section-sub">CBM eliminates guesswork by basing every maintenance decision on real asset data — saving money and preventing failures before they happen.</p>
+
+        <div class="cbm-steps">
+          <div class="cbm-step">
+            <div class="step-num">01</div>
+            <div class="step-content">
+              <div class="step-title">Instrument &amp; Connect</div>
+              <div class="step-desc">Install vibration sensors, thermocouples, pressure transmitters, and oil samplers on critical assets. Data flows to your SCADA or dedicated CBM platform.</div>
+            </div>
+          </div>
+          <div class="cbm-step">
+            <div class="step-num">02</div>
+            <div class="step-content">
+              <div class="step-title">Establish Baselines</div>
+              <div class="step-desc">Define normal operating signatures for each machine. Baselines become the benchmark against which all future measurements are compared.</div>
+            </div>
+          </div>
+          <div class="cbm-step">
+            <div class="step-num">03</div>
+            <div class="step-content">
+              <div class="step-title">Monitor &amp; Analyse</div>
+              <div class="step-desc">Continuous or periodic data collection feeds trend analysis and spectrum diagnostics. Our engineers identify patterns that indicate developing faults.</div>
+            </div>
+          </div>
+          <div class="cbm-step">
+            <div class="step-num">04</div>
+            <div class="step-content">
+              <div class="step-title">Act Before Failure</div>
+              <div class="step-desc">Automated alerts trigger work orders at the optimal maintenance window — not too early, not too late — maximising asset life and minimising costs.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cbm-visual">
+        <div class="cbm-chart-wrap">
+          <div class="chart-title">Maintenance Cost Comparison (per asset / year)</div>
+          <div class="chart-bars">
+            <div class="chart-bar bar-cbm" style="height:55%;animation-delay:0.1s" title="CBM"></div>
+            <div class="chart-bar bar-ppm" style="height:72%;animation-delay:0.2s" title="Preventive"></div>
+            <div class="chart-bar bar-bm"  style="height:100%;animation-delay:0.3s" title="Run-to-Fail"></div>
+          </div>
+          <div class="chart-labels">
+            <div class="chart-lbl" style="color:var(--accent2);">CBM</div>
+            <div class="chart-lbl">Preventive</div>
+            <div class="chart-lbl" style="color:#ef4444;">Run-to-Fail</div>
+          </div>
+        </div>
+
+        <div class="cbm-metrics">
+          <div class="metric-box">
+            <div class="metric-val">↓ 25%</div>
+            <div class="metric-lbl">Maintenance costs</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">↓ 70%</div>
+            <div class="metric-lbl">Unplanned downtime</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">↑ 30%</div>
+            <div class="metric-lbl">Asset lifespan</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-val">↑ 98%</div>
+            <div class="metric-lbl">Availability target</div>
+          </div>
+        </div>
+
+        <div class="cbm-techniques">
+          <span class="badge" style="margin-bottom:8px;">CBM Techniques We Use:</span><br>
+          <span class="technique-tag">Vibration Analysis</span>
+          <span class="technique-tag">Infrared Thermography</span>
+          <span class="technique-tag">Oil &amp; Wear Debris Analysis</span>
+          <span class="technique-tag">Ultrasonic Testing</span>
+          <span class="technique-tag">Motor Current Signature</span>
+          <span class="technique-tag">Acoustic Emission</span>
+          <span class="technique-tag">Corrosion Monitoring</span>
+          <span class="technique-tag">Performance Trending</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════ WHY US ══ -->
+<section id="why" class="section">
+  <div class="container">
+    <div class="section-label">Why Little Systems</div>
+    <h2 class="section-title">Engineering Expertise<br>You Can Rely On</h2>
+    <p class="section-sub">We combine deep technical knowledge with real-world plant experience to deliver solutions that actually work.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="why-title">Proven Track Record</div>
+        <div class="why-desc">Over two decades delivering automation and maintenance projects across oil &amp; gas, power, water, and manufacturing sectors.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="why-title">Fast Response Times</div>
+        <div class="why-desc">On-site support available within 24 hours for critical breakdowns. Remote diagnostics available around the clock.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <div class="why-title">Data-Driven Decisions</div>
+        <div class="why-desc">Every recommendation is backed by measurement data, trend analysis, and engineering principles — not guesswork.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round">
+            <path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/>
+            <path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            <path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/>
+            <path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/>
+            <path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/>
+            <path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/>
+            <path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/>
+            <path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/>
+          </svg>
+        </div>
+        <div class="why-title">Vendor-Agnostic Expertise</div>
+        <div class="why-desc">We work with all major PLC and SCADA vendors — Siemens, Rockwell, Schneider, ABB, Emerson, and more — without bias.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="why-title">Knowledge Transfer</div>
+        <div class="why-desc">We train your in-house team at every stage so you gain capability — not dependence — from every project we deliver.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="why-title">Fixed-Scope Delivery</div>
+        <div class="why-desc">Clear deliverables, transparent pricing, and structured milestones. Projects are delivered on time and within budget.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ INDUSTRIES ══ -->
+<section id="industries" class="section">
+  <div class="container">
+    <div class="section-label">Sectors We Serve</div>
+    <h2 class="section-title">Built for Heavy Industry</h2>
+    <p class="section-sub">Our engineers understand the unique challenges, safety requirements, and operational demands of each sector we serve.</p>
+
+    <div class="industries-grid">
+      <div class="industry-card">
+        <div class="industry-icon">🛢️</div>
+        <div class="industry-name">Oil &amp; Gas</div>
+        <div class="industry-desc">Upstream, midstream &amp; downstream automation</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">⚡</div>
+        <div class="industry-name">Power Generation</div>
+        <div class="industry-desc">Turbines, generators &amp; grid substations</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">💧</div>
+        <div class="industry-name">Water &amp; Wastewater</div>
+        <div class="industry-desc">Pumping stations &amp; treatment plants</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🏭</div>
+        <div class="industry-name">Manufacturing</div>
+        <div class="industry-desc">Production lines &amp; process automation</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">⛏️</div>
+        <div class="industry-name">Mining</div>
+        <div class="industry-desc">Conveyors, crushers &amp; processing plant</div>
+      </div>
+      <div class="industry-card">
+        <div class="industry-icon">🧪</div>
+        <div class="industry-name">Petrochemicals</div>
+        <div class="industry-desc">Reactors, compressors &amp; utilities</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ CTA BANNER ══ -->
+<section id="cta-banner">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-text">
+        <h2 class="cta-title">Ready to eliminate unplanned downtime?</h2>
+        <p class="cta-sub">Talk to our engineers about a CBM assessment or automation project — no obligation.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="#contact" class="btn btn-primary">
+          Start a Conversation
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="tel:+000000000" class="btn btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.73 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Us Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ CONTACT ══ -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Talk About<br>Your Project</h2>
+
+    <div class="contact-grid" style="margin-top:48px;">
+      <div class="contact-info">
+        <p class="section-sub">Whether you need a full CBM programme, a PLC upgrade, or just an expert opinion — we're here to help. Fill in the form or reach out directly.</p>
+
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.73 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.64 1.3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.29 6.29l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-val">+1 (000) 000-0000</div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-val">info@littlesystems.com</div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Location</div>
+              <div class="contact-val">Your City, Country</div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Business Hours</div>
+              <div class="contact-val">Mon–Fri, 8 AM – 6 PM</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <div class="form-title">Send Us a Message</div>
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="John Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="ACME Industries" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="john@company.com" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+1 555 000 0000" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="service">Service of Interest</label>
+            <select id="service" name="service">
+              <option value="">Select a service…</option>
+              <option>Condition-Based Maintenance (CBM)</option>
+              <option>PLC Programming</option>
+              <option>SCADA Systems</option>
+              <option>Industrial Automation Consulting</option>
+              <option>Multiple / Not Sure</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" placeholder="Tell us about your project, equipment, or challenge…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">
+            Send Message
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <div id="form-success" style="display:none;margin-top:16px;padding:14px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);border-radius:8px;color:#34d399;font-size:14px;text-align:center;">
+            ✓ Message sent! We'll be in touch within one business day.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#hero">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 0 4.93 19.07"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+            </svg>
+          </div>
+          Little Systems
+        </a>
+        <p class="footer-tagline">Specialists in industrial automation, PLC programming, SCADA systems, and condition-based maintenance for heavy industry worldwide.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Condition-Based Maintenance</a></li>
+          <li><a href="#services">PLC Programming</a></li>
+          <li><a href="#services">SCADA Systems</a></li>
+          <li><a href="#services">Automation Consulting</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#why">Why Choose Us</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#cbm">How CBM Works</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+000000000">+1 (000) 000-0000</a></li>
+          <li><a href="mailto:info@littlesystems.com">info@littlesystems.com</a></li>
+          <li><a href="#contact">Your City, Country</a></li>
+          <li><a href="#contact">Mon–Fri 8 AM–6 PM</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Little Systems. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMobileNav() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+
+  // Smooth active nav highlighting on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? '#f8fafc' : '';
+    });
+  });
+
+  // Form submission
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type=submit]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    setTimeout(() => {
+      document.getElementById('form-success').style.display = 'block';
+      e.target.reset();
+      btn.disabled = false;
+      btn.innerHTML = 'Send Message <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+    }, 900);
+  }
+
+  // Bar chart animation on scroll into view
+  const bars = document.querySelectorAll('.chart-bar');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animationPlayState = 'running';
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => { b.style.animationPlayState = 'paused'; observer.observe(b); });
+</script>
+
+</body>
+</html>
